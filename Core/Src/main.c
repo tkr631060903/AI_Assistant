@@ -58,7 +58,6 @@ void MX_FREERTOS_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 extern UART_HandleTypeDef huart1;
-extern DMA_HandleTypeDef hdma_usart1_tx;
 /* USER CODE END 0 */
 
 /**

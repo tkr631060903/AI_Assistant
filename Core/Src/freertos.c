@@ -46,6 +46,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
 extern UART_HandleTypeDef huart1;
+
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -58,6 +59,7 @@ const osThreadAttr_t defaultTask_attributes = {
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 void myTask(void *argument);
+
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
@@ -130,7 +132,8 @@ void myTask(void *argument)
   while (1)
   {
     HAL_UART_Transmit(&huart1, (uint8_t *)"myTask\r\n", sizeof("myTask\r"), 1000);
-    vTaskDelay(1000);
+    HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_0);
+    vTaskDelay(2000);
   }
   
 }
