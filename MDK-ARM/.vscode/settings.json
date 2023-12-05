@@ -1,4 +1,7 @@
 {
     "editor.suggest.snippetsPreventQuickSuggestions": false,
-    "aiXcoder.showTrayIcon": true
+    "aiXcoder.showTrayIcon": true,
+    "files.associations": {
+        "gpio.h": "c"
+    }
 }
