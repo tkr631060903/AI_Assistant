@@ -98,7 +98,7 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
-  xTaskCreate(myTask, "myTask", 128, NULL, 1, NULL);
+  xTaskCreate(myTask, "myTask", 512, NULL, 1, NULL);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
@@ -117,10 +117,12 @@ void MX_FREERTOS_Init(void) {
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
+  vTaskDelete(NULL);
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    HAL_UART_Transmit(&huart1, (uint8_t *)"DefaultTask\r\n", sizeof("DefaultTask\r"), 1000);
+    osDelay(1000);
   }
   /* USER CODE END StartDefaultTask */
 }

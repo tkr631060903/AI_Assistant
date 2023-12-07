@@ -57,7 +57,6 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define UART1_Buff 0
 
 /* USER CODE BEGIN Private defines */
 

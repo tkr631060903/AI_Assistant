@@ -26,6 +26,7 @@ ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h
 ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
+ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h
 ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
@@ -39,5 +40,7 @@ ai_assistant\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecat
 ai_assistant\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
 ai_assistant\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
 ai_assistant\main.o: ../Core/Inc/i2c.h
+ai_assistant\main.o: ../Core/Inc/spi.h
 ai_assistant\main.o: ../Core/Inc/usart.h
+ai_assistant\main.o: C:\software\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ai_assistant\main.o: ../Core/Inc/gpio.h

@@ -2,6 +2,9 @@
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "aiXcoder.showTrayIcon": true,
     "files.associations": {
-        "gpio.h": "c"
+        "gpio.h": "c",
+        "string": "c",
+        "usart.h": "c",
+        "stdio.h": "c"
     }
 }
