@@ -26,7 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "Application.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -59,7 +59,7 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-extern UART_HandleTypeDef huart1;
+
 /* USER CODE END 0 */
 
 /**
@@ -94,8 +94,7 @@ int main(void)
   MX_I2C1_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-  // HAL_UART_Transmit(&huart1, (uint8_t *)"AI_Assistant!\r\n", sizeof("AI_Assistant!\r"), 1000);
-  SPI_FLASH_ReadJEDECID();
+  Application_Init();
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -108,11 +107,10 @@ int main(void)
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  Application_main();
   while (1)
   {
-    HAL_Delay(3000);
     /* USER CODE END WHILE */
-
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -155,6 +153,10 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
+  /** Enables the Clock Security System
+  */
+  HAL_RCC_EnableCSS();
 }
 
 /* USER CODE BEGIN 4 */
@@ -191,6 +193,7 @@ void Error_Handler(void)
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
+  Application_Error_Handler();
   while (1)
   {
   }
@@ -210,6 +213,7 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  Application_Assert_Failed();
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

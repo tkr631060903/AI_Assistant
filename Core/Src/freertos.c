@@ -25,7 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "Application_RTOS.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,7 +45,6 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-extern UART_HandleTypeDef huart1;
 
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
@@ -58,7 +57,6 @@ const osThreadAttr_t defaultTask_attributes = {
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-void myTask(void *argument);
 
 /* USER CODE END FunctionPrototypes */
 
@@ -121,7 +119,6 @@ void StartDefaultTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    HAL_UART_Transmit(&huart1, (uint8_t *)"DefaultTask\r\n", sizeof("DefaultTask\r"), 1000);
     osDelay(1000);
   }
   /* USER CODE END StartDefaultTask */
@@ -129,15 +126,6 @@ void StartDefaultTask(void *argument)
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
-void myTask(void *argument)
-{
-  while (1)
-  {
-    HAL_UART_Transmit(&huart1, (uint8_t *)"myTask\r\n", sizeof("myTask\r"), 1000);
-    HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_0);
-    vTaskDelay(2000);
-  }
-  
-}
+
 /* USER CODE END Application */
 

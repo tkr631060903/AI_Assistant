@@ -35,16 +35,13 @@ extern "C" {
 extern I2C_HandleTypeDef hi2c1;
 
 /* USER CODE BEGIN Private defines */
-#define EEPROM_ADDR 0xA0
+
 /* USER CODE END Private defines */
 
 void MX_I2C1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-void I2C_EEPROM_WRTest(void);
-HAL_StatusTypeDef I2C_EEPROM_WriteByte(uint8_t WriteAddr, uint8_t *pData);
-HAL_StatusTypeDef I2C_EEPROM_BuffRead(uint8_t ReadAddr, uint8_t *pData, uint16_t NumByteToRead);
-HAL_StatusTypeDef I2C_EEPROM_BuffWrite(uint8_t WriteAddr, uint8_t *pData, uint16_t NumByteToWrite);
+
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

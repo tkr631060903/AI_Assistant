@@ -5,6 +5,15 @@
         "gpio.h": "c",
         "string": "c",
         "usart.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "application.h": "c",
+        "main.h": "c",
+        "application_init.h": "c",
+        "i2c_eeprom.h": "c",
+        "spi.h": "c",
+        "limits": "c",
+        "memory": "c",
+        "spi_flash.h": "c",
+        "application_constant.h": "c"
     }
 }

@@ -57,6 +57,28 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define SPI_FLASH_CS_Pin GPIO_PIN_0
+#define SPI_FLASH_CS_GPIO_Port GPIOC
+#define SPI_FLASH_SCK_Pin GPIO_PIN_5
+#define SPI_FLASH_SCK_GPIO_Port GPIOA
+#define SPI_FLASH_MISO_Pin GPIO_PIN_6
+#define SPI_FLASH_MISO_GPIO_Port GPIOA
+#define SPI_FLASH_MOSI_Pin GPIO_PIN_7
+#define SPI_FLASH_MOSI_GPIO_Port GPIOA
+#define LED_G_Pin GPIO_PIN_0
+#define LED_G_GPIO_Port GPIOB
+#define LED_B_Pin GPIO_PIN_1
+#define LED_B_GPIO_Port GPIOB
+#define DEBUG_USART_TX_Pin GPIO_PIN_9
+#define DEBUG_USART_TX_GPIO_Port GPIOA
+#define DEBUG_USART_RX_Pin GPIO_PIN_10
+#define DEBUG_USART_RX_GPIO_Port GPIOA
+#define LED_R_Pin GPIO_PIN_5
+#define LED_R_GPIO_Port GPIOB
+#define I2C_EEPROM_SCL_Pin GPIO_PIN_6
+#define I2C_EEPROM_SCL_GPIO_Port GPIOB
+#define I2C_EEPROM_SDA_Pin GPIO_PIN_7
+#define I2C_EEPROM_SDA_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

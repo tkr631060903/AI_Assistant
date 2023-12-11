@@ -22,8 +22,6 @@
 
 /* USER CODE BEGIN 0 */
 
-extern UART_HandleTypeDef huart1;
-
 /* USER CODE END 0 */
 
 SPI_HandleTypeDef hspi1;
@@ -79,15 +77,15 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* spiHandle)
     PA6     ------> SPI1_MISO
     PA7     ------> SPI1_MOSI
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_5|GPIO_PIN_7;
+    GPIO_InitStruct.Pin = SPI_FLASH_SCK_Pin|SPI_FLASH_MOSI_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = GPIO_PIN_6;
+    GPIO_InitStruct.Pin = SPI_FLASH_MISO_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    HAL_GPIO_Init(SPI_FLASH_MISO_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN SPI1_MspInit 1 */
 
@@ -111,7 +109,7 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* spiHandle)
     PA6     ------> SPI1_MISO
     PA7     ------> SPI1_MOSI
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7);
+    HAL_GPIO_DeInit(GPIOA, SPI_FLASH_SCK_Pin|SPI_FLASH_MISO_Pin|SPI_FLASH_MOSI_Pin);
 
   /* USER CODE BEGIN SPI1_MspDeInit 1 */
 
@@ -120,43 +118,5 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* spiHandle)
 }
 
 /* USER CODE BEGIN 1 */
-
-uint8_t SPI_FLASH_SendByte(uint8_t byte)
-{
-  uint8_t data = 0;
-  HAL_StatusTypeDef status;
-  status = HAL_SPI_TransmitReceive(&hspi1, &byte, &data, 1, 1000);
-  while (status != HAL_OK)
-  {
-  }
-  //  status = HAL_SPI_Transmit(&hspi1, &byte, 1, 1000);
-  // // status = HAL_SPI_Transmit_DMA(&hspi1, &byte, sizeof(&byte));
-  // while (HAL_SPI_GetState(&hspi1) == HAL_SPI_STATE_BUSY_TX_RX || status != HAL_OK)
-  // {
-  // }
-  // status = HAL_SPI_Receive(&hspi1, &data, 1, 1000);
-  // // status = HAL_SPI_Receive_DMA(&hspi1, &data, sizeof(&data));
-  // while (HAL_SPI_GetState(&hspi1) == HAL_SPI_STATE_BUSY_TX_RX || status != HAL_OK)
-  // {
-  // }
-  return data;
-}
-
-uint32_t SPI_FLASH_ReadJEDECID(void)
-{
-  uint32_t Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
-
-  SPI_FLASH_CS_LOW;
-
-  SPI_FLASH_SendByte(W25X_JedecDeviceID);
-  Temp0 = SPI_FLASH_SendByte(W25X_Dummy_Byte);
-  Temp1 = SPI_FLASH_SendByte(W25X_Dummy_Byte);
-  Temp2 = SPI_FLASH_SendByte(W25X_Dummy_Byte);
-
-  SPI_FLASH_CS_HIGH;
-  Temp = (Temp0 << 16) | (Temp1 << 8) | Temp2;
-  printf("0x%x\r\n", Temp);
-  return Temp;
-}
 
 /* USER CODE END 1 */

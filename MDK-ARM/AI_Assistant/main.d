@@ -42,5 +42,11 @@ ai_assistant\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrap
 ai_assistant\main.o: ../Core/Inc/i2c.h
 ai_assistant\main.o: ../Core/Inc/spi.h
 ai_assistant\main.o: ../Core/Inc/usart.h
-ai_assistant\main.o: C:\software\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ai_assistant\main.o: ../Core/Inc/gpio.h
+ai_assistant\main.o: ../Application/Inc/Application.h
+ai_assistant\main.o: C:\software\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+ai_assistant\main.o: ../Application/Inc/Application_Constant.h
+ai_assistant\main.o: ../Application/Inc/Application_Init.h
+ai_assistant\main.o: ../Application/Inc/Application.h
+ai_assistant\main.o: ../Application/Inc/I2C_EEPROM.h
+ai_assistant\main.o: ../Application/Inc/SPI_FLASH.h

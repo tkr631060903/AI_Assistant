@@ -11,13 +11,16 @@
                 "d:\\Workspace\\AI_Assistant\\Middlewares\\Third_Party\\FreeRTOS\\Source\\include",
                 "d:\\Workspace\\AI_Assistant\\Middlewares\\Third_Party\\FreeRTOS\\Source\\CMSIS_RTOS_V2",
                 "d:\\Workspace\\AI_Assistant\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\RVDS\\ARM_CM3",
+                "d:\\Workspace\\AI_Assistant\\Application",
+                "d:\\Workspace\\AI_Assistant\\Application\\Inc",
                 "C:\\software\\Keil_v5\\ARM\\ARMCC\\include",
                 "C:\\software\\Keil_v5\\ARM\\ARMCC\\include\\rw",
                 "d:\\Workspace\\AI_Assistant\\MDK-ARM",
                 "d:\\Workspace\\AI_Assistant\\Core\\Src",
                 "d:\\Workspace\\AI_Assistant\\Drivers\\STM32F1xx_HAL_Driver\\Src",
                 "d:\\Workspace\\AI_Assistant\\Middlewares\\Third_Party\\FreeRTOS\\Source",
-                "d:\\Workspace\\AI_Assistant\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\MemMang"
+                "d:\\Workspace\\AI_Assistant\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\MemMang",
+                "d:\\Workspace\\AI_Assistant\\Application\\Src"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

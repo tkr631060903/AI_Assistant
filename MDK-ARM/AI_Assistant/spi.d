@@ -31,5 +31,3 @@ ai_assistant\spi.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h
 ai_assistant\spi.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 ai_assistant\spi.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 ai_assistant\spi.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
-ai_assistant\spi.o: ../Core/Inc/usart.h
-ai_assistant\spi.o: C:\software\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

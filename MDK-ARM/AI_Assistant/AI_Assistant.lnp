@@ -36,6 +36,12 @@
 "ai_assistant\cmsis_os2.o"
 "ai_assistant\heap_4.o"
 "ai_assistant\port.o"
+"ai_assistant\application.o"
+"ai_assistant\application_init.o"
+"ai_assistant\i2c_eeprom.o"
+"ai_assistant\spi_flash.o"
+"ai_assistant\application_rtos.o"
+"ai_assistant\uart_debug.o"
 --library_type=microlib --strict --scatter "AI_Assistant\AI_Assistant.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

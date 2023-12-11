@@ -41,3 +41,12 @@ ai_assistant\freertos.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_e
 ai_assistant\freertos.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 ai_assistant\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
 ai_assistant\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
+ai_assistant\freertos.o: ../Application/Inc/Application_RTOS.h
+ai_assistant\freertos.o: ../Application/Inc/Application.h
+ai_assistant\freertos.o: C:\software\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+ai_assistant\freertos.o: ../Application/Inc/Application_Constant.h
+ai_assistant\freertos.o: ../Application/Inc/Application_Init.h
+ai_assistant\freertos.o: ../Application/Inc/Application.h
+ai_assistant\freertos.o: ../Application/Inc/I2C_EEPROM.h
+ai_assistant\freertos.o: ../Application/Inc/SPI_FLASH.h
+ai_assistant\freertos.o: ../Core/Inc/usart.h
