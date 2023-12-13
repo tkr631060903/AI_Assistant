@@ -7,6 +7,7 @@
 #include "Application_Init.h"
 #include "I2C_EEPROM.h"
 #include "SPI_FLASH.h"
+#include "SDIO_SDCard.h"
 
 // 定义结构体类型
 // typedef struct

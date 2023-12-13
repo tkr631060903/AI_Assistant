@@ -29,5 +29,6 @@
 #define SPI_FLASH_CS_HIGH HAL_GPIO_WritePin(SPI_FLASH_CS_GPIO_Port, SPI_FLASH_CS_Pin, GPIO_PIN_SET)
 
 APP_StatusTypeDef SPI_FLASH_ReadJEDECID(void);
+APP_StatusTypeDef SPI_FLASH_Check(void);
 
 #endif

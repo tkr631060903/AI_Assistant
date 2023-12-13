@@ -43,3 +43,20 @@ APP_StatusTypeDef SPI_FLASH_ReadJEDECID(void)
   }
   return APP_ERROR;
 }
+
+APP_StatusTypeDef SPI_FLASH_Check(void)
+{
+  uint32_t Temp = 0, Temp0 = 0, Temp1 = 0, Temp2 = 0;
+  SPI_FLASH_CS_LOW;
+  SPI_FLASH_SendByte(W25X_JedecDeviceID);
+  Temp0 = SPI_FLASH_SendByte(W25X_Dummy_Byte);
+  Temp1 = SPI_FLASH_SendByte(W25X_Dummy_Byte);
+  Temp2 = SPI_FLASH_SendByte(W25X_Dummy_Byte);
+  SPI_FLASH_CS_HIGH;
+  Temp = (Temp0 << 16) | (Temp1 << 8) | Temp2;
+  if (Temp == 0xEF4017)
+  {
+    return APP_OK;
+  }
+  return APP_ERROR;
+}

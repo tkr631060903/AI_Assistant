@@ -7,6 +7,7 @@ extern UART_HandleTypeDef huart1;
 
 void myTask(void* argument)
 {
+    vTaskDelete(NULL);
     while (1)
     {
         HAL_UART_Transmit(&huart1, (uint8_t*)"myTask\r\n", sizeof("myTask\r"), 1000);

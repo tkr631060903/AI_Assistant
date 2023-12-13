@@ -28,6 +28,8 @@ ai_assistant\spi_flash.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flas
 ai_assistant\spi_flash.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 ai_assistant\spi_flash.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h
 ai_assistant\spi_flash.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
+ai_assistant\spi_flash.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sd.h
+ai_assistant\spi_flash.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_sdmmc.h
 ai_assistant\spi_flash.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h
 ai_assistant\spi_flash.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 ai_assistant\spi_flash.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
@@ -38,4 +40,5 @@ ai_assistant\spi_flash.o: ../Application/Inc/Application_Init.h
 ai_assistant\spi_flash.o: ../Application/Inc/Application.h
 ai_assistant\spi_flash.o: ../Application/Inc/I2C_EEPROM.h
 ai_assistant\spi_flash.o: ../Application/Inc/SPI_FLASH.h
+ai_assistant\spi_flash.o: ../Application/Inc/SDIO_SDCard.h
 ai_assistant\spi_flash.o: ../Core/Inc/usart.h

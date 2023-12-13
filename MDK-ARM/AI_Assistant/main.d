@@ -26,6 +26,8 @@ ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h
 ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
+ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sd.h
+ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_sdmmc.h
 ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h
 ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 ai_assistant\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
@@ -40,6 +42,7 @@ ai_assistant\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecat
 ai_assistant\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
 ai_assistant\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
 ai_assistant\main.o: ../Core/Inc/i2c.h
+ai_assistant\main.o: ../Core/Inc/sdio.h
 ai_assistant\main.o: ../Core/Inc/spi.h
 ai_assistant\main.o: ../Core/Inc/usart.h
 ai_assistant\main.o: ../Core/Inc/gpio.h
@@ -50,3 +53,4 @@ ai_assistant\main.o: ../Application/Inc/Application_Init.h
 ai_assistant\main.o: ../Application/Inc/Application.h
 ai_assistant\main.o: ../Application/Inc/I2C_EEPROM.h
 ai_assistant\main.o: ../Application/Inc/SPI_FLASH.h
+ai_assistant\main.o: ../Application/Inc/SDIO_SDCard.h

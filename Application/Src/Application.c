@@ -33,6 +33,7 @@ void Application_main()
 void Application_Error_Handler()
 {
     /* User can add his own implementation to report the HAL error return state */
+    printf("Error_Handler");
 }
 
 /*

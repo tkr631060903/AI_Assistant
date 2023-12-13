@@ -14,6 +14,7 @@
         "limits": "c",
         "memory": "c",
         "spi_flash.h": "c",
-        "application_constant.h": "c"
+        "application_constant.h": "c",
+        "sdio_sdcard.h": "c"
     }
 }
