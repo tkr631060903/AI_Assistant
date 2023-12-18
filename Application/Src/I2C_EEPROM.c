@@ -3,6 +3,13 @@
 extern I2C_HandleTypeDef hi2c1;
 extern UART_HandleTypeDef huart1;
 
+/**
+ *@brief 写入一个Byte数据到EEPROM
+ * 
+ * @param WriteAddr 写入EEPROM起始地址
+ * @param pData 数据缓冲区
+ * @return HAL_Status
+ */
 HAL_StatusTypeDef I2C_EEPROM_WriteByte(uint16_t WriteAddr, uint8_t* pData)
 {
 
@@ -27,6 +34,14 @@ HAL_StatusTypeDef I2C_EEPROM_WriteByte(uint16_t WriteAddr, uint8_t* pData)
   return state;
 }
 
+/**
+ *@brief 连续写数据到EEPROM
+ * 
+ * @param WriteAddr 写入EEPROM起始地址
+ * @param pData 数据缓冲区
+ * @param NumByteToWrite 写入数据个数
+ * @return HAL_Status
+ */
 HAL_StatusTypeDef I2C_EEPROM_BuffWrite(uint16_t WriteAddr, uint8_t* pData, uint16_t NumByteToWrite)
 {
   HAL_StatusTypeDef state = HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, WriteAddr, I2C_MEMADD_SIZE_8BIT, pData, NumByteToWrite, 1000);
@@ -50,6 +65,14 @@ HAL_StatusTypeDef I2C_EEPROM_BuffWrite(uint16_t WriteAddr, uint8_t* pData, uint1
   return state;
 }
 
+/**
+ *@brief 连续读EEPROM数据
+ * 
+ * @param ReadAddr 读取EEPROM起始地址
+ * @param pData 数据缓冲区
+ * @param NumByteToRead 写入数据个数
+ * @return HAL_Status
+ */
 HAL_StatusTypeDef I2C_EEPROM_BuffRead(uint16_t ReadAddr, uint8_t* pData, uint16_t NumByteToRead)
 {
   HAL_StatusTypeDef state = HAL_I2C_Mem_Read(&hi2c1, EEPROM_ADDR, ReadAddr, I2C_MEMADD_SIZE_8BIT, pData, NumByteToRead, 1000);
@@ -60,6 +83,10 @@ HAL_StatusTypeDef I2C_EEPROM_BuffRead(uint16_t ReadAddr, uint8_t* pData, uint16_
   return state;
 }
 
+/**
+ *@brief EEPROM读写测试
+ * 
+ */
 void I2C_EEPROM_WRTest(void)
 {
   uint8_t writeData[3] = { 0x01, 0x02, 0x03 };
@@ -72,6 +99,11 @@ void I2C_EEPROM_WRTest(void)
   }
 }
 
+/**
+ *@brief 校验EEPROM外设
+ * 
+ * @return APP_Status
+ */
 APP_StatusTypeDef I2C_EEPROM_Check(void)
 {
   uint8_t data[1] = { 0x10 };

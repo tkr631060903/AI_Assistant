@@ -3,6 +3,7 @@
 "ai_assistant\main.o"
 "ai_assistant\gpio.o"
 "ai_assistant\freertos.o"
+"ai_assistant\dma.o"
 "ai_assistant\i2c.o"
 "ai_assistant\sdio.o"
 "ai_assistant\spi.o"

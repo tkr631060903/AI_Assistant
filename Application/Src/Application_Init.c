@@ -1,5 +1,9 @@
 #include "Application_Init.h"
 
+/**
+ *@brief SD卡自定义初始化
+ * 
+ */
 void SDIO_CARD_Init(void)
 {
     /* 初始化完成SDIO卡后为了提高读写，开启4bits模式 */
@@ -10,6 +14,10 @@ void SDIO_CARD_Init(void)
     }
 }
 
+/**
+ *@brief 应用初始化
+ * 
+ */
 void Application_Init(void)
 {
     // 初始化串口中断输入
@@ -39,4 +47,6 @@ void Application_Init(void)
         printf("SDCard Check Failed\r\n");
         Error_Handler();
     }
+    SPI_FLASH_Test();
+    printf("Init Success\r\n");
 }

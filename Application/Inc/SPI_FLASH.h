@@ -4,6 +4,9 @@
 #include "Application.h"
 #include "usart.h"
 
+#define SPI_FLASH_PageSize 256 // W25Q64页大小，256byte
+#define W25Q64_FLASH_ID 0xEF4017 // W25Q64
+
 // FLASH命令定义
 #define W25X_WriteEnable 0x06
 #define W25X_WriteDisable 0x04
@@ -28,7 +31,15 @@
 #define SPI_FLASH_CS_LOW HAL_GPIO_WritePin(SPI_FLASH_CS_GPIO_Port, SPI_FLASH_CS_Pin, GPIO_PIN_RESET)
 #define SPI_FLASH_CS_HIGH HAL_GPIO_WritePin(SPI_FLASH_CS_GPIO_Port, SPI_FLASH_CS_Pin, GPIO_PIN_SET)
 
-APP_StatusTypeDef SPI_FLASH_ReadJEDECID(void);
+APP_StatusTypeDef SPI_FLASH_BufferReadJEDECID(void);
 APP_StatusTypeDef SPI_FLASH_Check(void);
+void SPI_FLASH_ChipSector(void);
+void SPI_FLASH_WaitForWriteEnd(void);
+void SPI_FLASH_WriteEnable(void);
+void SPI_FLASH_WriteDisable(void);
+void SPI_FLASH_SectorSector(uint32_t SectorAddr);
+void SPI_FLASH_PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
+
+void SPI_FLASH_Test(void);
 
 #endif

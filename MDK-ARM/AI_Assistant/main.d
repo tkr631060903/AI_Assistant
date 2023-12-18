@@ -41,6 +41,7 @@ ai_assistant\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable
 ai_assistant\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
 ai_assistant\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
 ai_assistant\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+ai_assistant\main.o: ../Core/Inc/dma.h
 ai_assistant\main.o: ../Core/Inc/i2c.h
 ai_assistant\main.o: ../Core/Inc/sdio.h
 ai_assistant\main.o: ../Core/Inc/spi.h

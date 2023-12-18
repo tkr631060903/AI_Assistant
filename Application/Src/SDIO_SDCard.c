@@ -1,5 +1,10 @@
 #include "SDIO_SDCard.h"
 
+/**
+ *@brief 校验SD卡外设
+ * 
+ * @return APP_Status
+ */
 APP_StatusTypeDef SDIO_SDCard_Check(void)
 {
     uint32_t timeout = 100000;

@@ -49,7 +49,7 @@ void MX_SDIO_SD_Init(void)
   {
     Error_Handler();
   }
-  if (HAL_SD_ConfigWideBusOperation(&hsd, SDIO_BUS_WIDE_1B) != HAL_OK)
+  if (HAL_SD_ConfigWideBusOperation(&hsd, SDIO_BUS_WIDE_4B) != HAL_OK)
   {
     Error_Handler();
   }

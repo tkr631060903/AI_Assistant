@@ -10,12 +10,10 @@
 
 /* Private function prototypes------------------------------------------------*/
 
-/*
-    * @name   Run
-    * @brief  系统运行
-    * @param  None
-    * @retval None
-*/
+/**
+ *@brief 系统运行
+ * 
+ */
 void Application_main()
 {
     while (1)
@@ -24,24 +22,20 @@ void Application_main()
     }
 }
 
-/*
-    * @name   Error_Handler
-    * @brief  错误处理
-    * @param  None
-    * @retval None
-*/
+/**
+ *@brief 错误处理
+ * 
+ */
 void Application_Error_Handler()
 {
     /* User can add his own implementation to report the HAL error return state */
     printf("Error_Handler");
 }
 
-/*
-    * @name   Assert_Failed
-    * @brief  函数参数错误厝里
-    * @param  None
-    * @retval None
-*/
+/**
+ *@brief 函数参数错误处理
+ * 
+ */
 void Application_Assert_Failed()
 {
     /* User can add his own implementation to report the file name and line number,
