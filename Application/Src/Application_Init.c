@@ -47,6 +47,5 @@ void Application_Init(void)
         printf("SDCard Check Failed\r\n");
         Error_Handler();
     }
-    SPI_FLASH_Test();
     printf("Init Success\r\n");
 }
