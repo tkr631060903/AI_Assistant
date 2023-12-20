@@ -3,6 +3,7 @@
 
 #include "Application.h"
 
+void UART_Debug_INT(void);
 int fputc(int ch, FILE* f);
 
 #endif

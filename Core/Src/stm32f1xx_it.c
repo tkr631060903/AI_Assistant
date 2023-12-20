@@ -22,6 +22,7 @@
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "Application.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -199,18 +200,7 @@ void DMA1_Channel3_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-  
-  // extern uint8_t Uart1_ReceiveBuff;
-  // HAL_UART_Receive_IT(&huart1, &Uart1_ReceiveBuff, sizeof(Uart1_ReceiveBuff));
-  // HAL_UART_Transmit(&huart1, &Uart1_ReceiveBuff, sizeof(Uart1_ReceiveBuff), 1000);
-  // HAL_UART_Transmit_IT(&huart1, &Uart1_ReceiveBuff, sizeof(Uart1_ReceiveBuff));
-  uint8_t ch = 0;
-  if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_RXNE) != RESET)
-  {
-    ch = (uint16_t)READ_REG(huart1.Instance->DR);
-    WRITE_REG(huart1.Instance->DR, ch);
-  }
-
+  UART_Debug_INT();
   /* USER CODE END USART1_IRQn 0 */
   HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */

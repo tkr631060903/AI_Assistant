@@ -20,6 +20,7 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "dma.h"
+#include "fatfs.h"
 #include "i2c.h"
 #include "sdio.h"
 #include "spi.h"
@@ -97,6 +98,7 @@ int main(void)
   MX_I2C1_Init();
   MX_SPI1_Init();
   MX_SDIO_SD_Init();
+  MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
   Application_Init();
   /* USER CODE END 2 */

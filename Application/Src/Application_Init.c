@@ -8,6 +8,12 @@ void SDIO_CARD_Init(void)
 {
     /* 初始化完成SDIO卡后为了提高读写，开启4bits模式 */
     extern SD_HandleTypeDef hsd;
+    hsd.Init.BusWide = SDIO_BUS_WIDE_1B;
+    if (HAL_SD_Init(&hsd) != HAL_OK)
+    {
+        Error_Handler();
+    }
+    
     if (HAL_SD_ConfigWideBusOperation(&hsd, SDIO_BUS_WIDE_4B) != HAL_OK)
     {
         Error_Handler();
@@ -47,5 +53,6 @@ void Application_Init(void)
         printf("SDCard Check Failed\r\n");
         Error_Handler();
     }
+    SDIO_SDCard_Test();
     printf("Init Success\r\n");
 }
