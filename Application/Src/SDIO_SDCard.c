@@ -98,7 +98,7 @@ APP_StatusTypeDef SDIO_SDCard_ReadBlocks_DMA(SD_HandleTypeDef* hsd, uint8_t* pDa
     }
 }
 
-#if 1
+#if 0
 void Fill_Buffer(uint8_t* pBuffer, uint32_t BufferLength, uint32_t Offset);
 void Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint32_t BufferLength);
 void SDCard_WETest(void);

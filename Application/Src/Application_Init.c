@@ -53,6 +53,6 @@ void Application_Init(void)
         printf("SDCard Check Failed\r\n");
         Error_Handler();
     }
-    SDIO_SDCard_Test();
+    // SDIO_SDCard_Test();
     printf("Init Success\r\n");
 }

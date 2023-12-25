@@ -10,6 +10,7 @@
 - 智能问答
 - 屏幕UI
 - 模拟USB
+- 远程升级
 
 ## 上位机功能
 
@@ -26,6 +27,7 @@
 - 8MB SPI1 FLASH
 - 三色呼吸灯
 - SDIO SD卡
-- FLASH和SD卡支持FatFs
+- SD卡支持FatFs
 - FreeRTOS
-
+- bootloader
+- 模拟USB
