@@ -1,12 +1,23 @@
-#include "SPI_FLASH.h"
+/**
+ * @file SPI_FLASH_W25Q64.c
+ * @author TanKairong (tkr631060903@gmail.com)
+ * @brief W25Q64驱动基于STM32F103 HAL库编写
+ * 需要引用Application_Constant.h，stm32f1xx_hal_spi.h头文件
+ * @version 0.1
+ * @date 2023-12-27
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+#include "SPI_FLASH_W25Q64.h"
 
 extern SPI_HandleTypeDef hspi1;
 
 /**
- *@brief 发送一个字节数据
- * 
+ * @brief 发送一个字节数据
+ *
  * @param byte 待发送数据
- * @return 接收到的数据 
+ * @return 接收到的数据
  */
 uint8_t SPI_FLASH_SendByte(uint8_t byte)
 {
@@ -31,8 +42,8 @@ uint8_t SPI_FLASH_SendByte(uint8_t byte)
 }
 
 /**
- *@brief 校验FLASH ID
- * 
+ * @brief 校验FLASH ID
+ *
  * @return APP_Status
  */
 APP_StatusTypeDef SPI_FLASH_BufferReadJEDECID(void)
@@ -48,7 +59,6 @@ APP_StatusTypeDef SPI_FLASH_BufferReadJEDECID(void)
 
   SPI_FLASH_CS_HIGH;
   Temp = (Temp0 << 16) | (Temp1 << 8) | Temp2;
-  printf("0x%x\r\n", Temp);
   if (Temp == W25Q64_FLASH_ID)
   {
     return APP_OK;
@@ -57,8 +67,8 @@ APP_StatusTypeDef SPI_FLASH_BufferReadJEDECID(void)
 }
 
 /**
- *@brief 校验FLASH外设
- * 
+ * @brief 校验FLASH外设
+ *
  * @return APP_Status
  */
 APP_StatusTypeDef SPI_FLASH_Check(void)
@@ -79,8 +89,8 @@ APP_StatusTypeDef SPI_FLASH_Check(void)
 }
 
 /**
- *@brief FLASH全片擦除
- * 
+ * @brief FLASH全片擦除
+ *
  */
 void SPI_FLASH_ChipSector(void)
 {
@@ -94,22 +104,21 @@ void SPI_FLASH_ChipSector(void)
 
 /**
  * @brief 等待FLASH程序、擦除、写入完成
- * 
+ *
  */
 void SPI_FLASH_WaitForWriteEnd(void)
 {
   SPI_FLASH_CS_LOW;
   SPI_FLASH_SendByte(W25X_ReadStatusReg);
-  while (SPI_FLASH_SendByte(W25X_Dummy_Byte) & 0x01);
+  while (SPI_FLASH_SendByte(W25X_Dummy_Byte) & 0x01)
   {
-    printf("wait for write end\r\n");
   }
   SPI_FLASH_CS_HIGH;
 }
 
 /**
- *@brief FLASH写使能
- * 
+ * @brief FLASH写使能
+ *
  */
 void SPI_FLASH_WriteEnable(void)
 {
@@ -119,8 +128,8 @@ void SPI_FLASH_WriteEnable(void)
 }
 
 /**
- *@brief FLASH写入禁用
- * 
+ * @brief FLASH写入禁用
+ *
  */
 void SPI_FLASH_WriteDisable(void)
 {
@@ -130,8 +139,8 @@ void SPI_FLASH_WriteDisable(void)
 }
 
 /**
- *@brief FLASH扇区擦除,擦除4KB存储空间
- * 
+ * @brief FLASH扇区擦除,擦除4KB存储空间
+ *
  * @param SectorAddr 需擦除的扇区地址
  */
 void SPI_FLASH_SectorSector(uint32_t SectorAddr)
@@ -152,8 +161,8 @@ void SPI_FLASH_SectorSector(uint32_t SectorAddr)
 }
 
 /**
- *@brief 页写入,需要先进行擦除
- * 
+ * @brief 页写入,需要先进行擦除
+ *
  * @param pBuffer 写入数据缓冲区
  * @param WriteAddr 写入起始地址
  * @param NumByteToWrite 写入数据个数
@@ -162,7 +171,9 @@ void SPI_FLASH_PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteT
 {
   if (NumByteToWrite > SPI_FLASH_PageSize)
   {
+#if W25Q64_Debug
     printf("error: NumByteToWrite > SPI_FLASH_PageSize\r\n");
+#endif
     return;
   }
   SPI_FLASH_WriteEnable();
@@ -185,8 +196,8 @@ void SPI_FLASH_PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteT
 }
 
 /**
- *@brief 写数据,需要先进行擦除
- * 
+ * @brief 写数据,需要先进行擦除
+ *
  * @param pBuffer 写入数据缓冲区
  * @param WriteAddr 写入起始地址
  * @param NumByteToWrite 写入数据个数
@@ -271,8 +282,8 @@ void SPI_FLASH_BufferWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByt
 }
 
 /**
- *@brief 读数据
- * 
+ * @brief 读数据
+ *
  * @param pBuffer 读取数据缓冲区
  * @param ReadAddr 读取数据起始地址
  * @param NumByteToRead 读取数据个数
@@ -295,6 +306,7 @@ void SPI_FLASH_BufferRead(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteT
   SPI_FLASH_CS_HIGH;
 }
 
+#if W25Q64_Debug
 void SPI_FLASH_Test(void)
 {
   SPI_FLASH_SectorSector(0x123456);
@@ -312,3 +324,4 @@ void SPI_FLASH_Test(void)
     printf("0x%02X ", Rx_Buffer[i]);
   }
 }
+#endif

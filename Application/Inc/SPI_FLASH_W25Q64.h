@@ -1,9 +1,19 @@
-#ifndef __SPI_FLASH_H__
-#define __SPI_FLASH_H__
+/**
+ * @file SPI_FLASH_W25Q64.h
+ * @author TanKairong (tkr631060903@gmail.com)
+ * @brief W25Q64驱动基于STM32F103 HAL库编写
+ * @version 0.1
+ * @date 2023-12-27
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+#ifndef __SPI_FLASH_W25Q64_H__
+#define __SPI_FLASH_W25Q64_H__
 
 #include "Application.h"
-#include "usart.h"
 
+#define W25Q64_Debug 0
 #define SPI_FLASH_PageSize 256 // W25Q64页大小，256byte
 #define W25Q64_FLASH_ID 0xEF4017 // W25Q64
 
@@ -40,6 +50,8 @@ void SPI_FLASH_WriteDisable(void);
 void SPI_FLASH_SectorSector(uint32_t SectorAddr);
 void SPI_FLASH_PageWrite(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
 
+#if W25Q64_Debug
 void SPI_FLASH_Test(void);
+#endif
 
 #endif

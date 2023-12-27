@@ -999,16 +999,6 @@
               <FilePath>..\Application\Src\Application_Init.c</FilePath>
             </File>
             <File>
-              <FileName>I2C_EEPROM.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\Src\I2C_EEPROM.c</FilePath>
-            </File>
-            <File>
-              <FileName>SPI_FLASH.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\Src\SPI_FLASH.c</FilePath>
-            </File>
-            <File>
               <FileName>Application_RTOS.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Application\Src\Application_RTOS.c</FilePath>
@@ -1022,6 +1012,16 @@
               <FileName>SDIO_SDCard.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Application\Src\SDIO_SDCard.c</FilePath>
+            </File>
+            <File>
+              <FileName>I2C_EEPROM_AT24C02.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\Src\I2C_EEPROM_AT24C02.c</FilePath>
+            </File>
+            <File>
+              <FileName>SPI_FLASH_W25Q64.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\Src\SPI_FLASH_W25Q64.c</FilePath>
             </File>
           </Files>
         </Group>

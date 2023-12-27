@@ -1,3 +1,13 @@
+/**
+ * @file Application.c
+ * @author TanKairong (tkr631060903@gmail.com)
+ * @brief 应用入口
+ * @version 0.1
+ * @date 2023-12-27
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include "Application.h"
 
 /* Public variables-----------------------------------------------------------*/

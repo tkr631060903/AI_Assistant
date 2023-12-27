@@ -1,3 +1,14 @@
+/**
+ * @file SDIO_SDCard.c
+ * @author TanKairong (tkr631060903@gmail.com)
+ * @brief SD卡驱动基于STM32F103 HAL库编写
+ * 需要引用Application_Constant.h头文件
+ * @version 0.1
+ * @date 2023-12-27
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include "SDIO_SDCard.h"
 
 extern SD_HandleTypeDef hsd;
@@ -98,7 +109,7 @@ APP_StatusTypeDef SDIO_SDCard_ReadBlocks_DMA(SD_HandleTypeDef* hsd, uint8_t* pDa
     }
 }
 
-#if 0
+#if SDCard_Debug
 void Fill_Buffer(uint8_t* pBuffer, uint32_t BufferLength, uint32_t Offset);
 void Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint32_t BufferLength);
 void SDCard_WETest(void);

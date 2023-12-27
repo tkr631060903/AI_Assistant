@@ -1,3 +1,13 @@
+/**
+ * @file UART_Debug.c
+ * @author TanKairong (tkr631060903@gmail.com)
+ * @brief uart1调试串口
+ * @version 0.1
+ * @date 2023-12-27
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include "UART_Debug.h"
 
 extern UART_HandleTypeDef huart1;

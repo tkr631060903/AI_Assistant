@@ -1,7 +1,17 @@
+/**
+ * @file Application_Init.c
+ * @author TanKairong (tkr631060903@gmail.com)
+ * @brief 应用初始化
+ * @version 0.1
+ * @date 2023-12-27
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include "Application_Init.h"
 
 /**
- *@brief SD卡自定义初始化
+ * @brief SD卡自定义初始化
  * 
  */
 void SDIO_CARD_Init(void)
@@ -21,7 +31,7 @@ void SDIO_CARD_Init(void)
 }
 
 /**
- *@brief 应用初始化
+ * @brief 应用初始化
  * 
  */
 void Application_Init(void)
@@ -38,7 +48,7 @@ void Application_Init(void)
         printf("EEPROM Check Failed\r\n");
         Error_Handler();
     }
-    // SPI_FLASH_ReadJEDECID();
+    // SPI_FLASH_Test();
     if (SPI_FLASH_Check() == APP_OK) {
         printf("FLASH Check Success\r\n");
     }
