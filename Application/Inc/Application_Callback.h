@@ -1,18 +1,15 @@
 /**
- * @file UART_Debug.h
+ * @file Application_Callback.h
  * @author TanKairong (tkr631060903@gmail.com)
- * @brief uart1调试串口
+ * @brief 中断回调函数
  * @version 0.1
  * @date 2023-12-27
  * 
  * @copyright Copyright (c) 2023
  * 
  */
-#ifndef __UART_Debug_H__
-#define __UART_Debug_H__
-
 #include "Application.h"
 
-int fputc(int ch, FILE* f);
+#define UART_Cmd_Length 10
 
-#endif
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart);

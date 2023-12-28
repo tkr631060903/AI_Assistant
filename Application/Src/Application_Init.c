@@ -10,7 +10,9 @@
  */
 #include "Application_Init.h"
 
-/**
+uint8_t Uart1_ReceiveBuff = 0;
+
+ /**
  * @brief SD卡自定义初始化
  * 
  */
@@ -37,8 +39,7 @@ void SDIO_CARD_Init(void)
 void Application_Init(void)
 {
     // 初始化串口中断输入
-    uint8_t Uart1_ReceiveBuff = 0;
-    HAL_UART_Receive_IT(&huart1, &Uart1_ReceiveBuff, sizeof(Uart1_ReceiveBuff));
+    HAL_UART_Receive_IT(&huart1, &Uart1_ReceiveBuff, 1);
     SDIO_CARD_Init();
     // I2C_EEPROM_WRTest();
     if (I2C_EEPROM_Check() == APP_OK) {

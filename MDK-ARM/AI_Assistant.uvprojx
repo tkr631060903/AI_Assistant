@@ -1023,6 +1023,11 @@
               <FileType>1</FileType>
               <FilePath>..\Application\Src\SPI_FLASH_W25Q64.c</FilePath>
             </File>
+            <File>
+              <FileName>Application_Callback.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\Src\Application_Callback.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
