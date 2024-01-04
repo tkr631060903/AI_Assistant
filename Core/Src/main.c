@@ -99,6 +99,7 @@ int main(void)
   MX_SPI1_Init();
   MX_SDIO_SD_Init();
   MX_FATFS_Init();
+  MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
   Application_Init();
   /* USER CODE END 2 */

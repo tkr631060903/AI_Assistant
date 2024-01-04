@@ -4,18 +4,19 @@
  * @brief 应用初始化
  * @version 0.1
  * @date 2023-12-27
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 #include "Application_Init.h"
 
-uint8_t Uart1_ReceiveBuff = 0;
+uint8_t Uart1_ReceiveBuff = 0;  //串口1接收缓冲区
+uint8_t Uart3_ReceiveBuff = 0;  //串口3接收缓冲区
 
- /**
- * @brief SD卡自定义初始化
- * 
- */
+/**
+* @brief SD卡自定义初始化
+*
+*/
 void SDIO_CARD_Init(void)
 {
     /* 初始化完成SDIO卡后为了提高读写，开启4bits模式 */
@@ -25,7 +26,7 @@ void SDIO_CARD_Init(void)
     {
         Error_Handler();
     }
-    
+
     if (HAL_SD_ConfigWideBusOperation(&hsd, SDIO_BUS_WIDE_4B) != HAL_OK)
     {
         Error_Handler();
@@ -33,14 +34,26 @@ void SDIO_CARD_Init(void)
 }
 
 /**
+* @brief WIFI_ESP8266自定义初始化
+*
+*/
+void WIFI_ESP8266_Init(void)
+{
+    WIFI_ESP8266_RST_HIGH_LEVEL();
+    WIFI_ESP8266_ENABLE();
+}
+
+/**
  * @brief 应用初始化
- * 
+ *
  */
 void Application_Init(void)
 {
     // 初始化串口中断输入
     HAL_UART_Receive_IT(&huart1, &Uart1_ReceiveBuff, 1);
+    HAL_UART_Receive_IT(&huart3, &Uart3_ReceiveBuff, 1);
     SDIO_CARD_Init();
+    WIFI_ESP8266_Init();
     // I2C_EEPROM_WRTest();
     if (I2C_EEPROM_Check() == APP_OK) {
         printf("EEPROM Check Success\r\n");
@@ -57,6 +70,7 @@ void Application_Init(void)
         printf("FLASH Check Failed\r\n");
         Error_Handler();
     }
+    // SDIO_SDCard_Test();
     if (SDIO_SDCard_Check() == APP_OK) {
         printf("SDCard Check Success\r\n");
     }
@@ -64,6 +78,9 @@ void Application_Init(void)
         printf("SDCard Check Failed\r\n");
         Error_Handler();
     }
-    // SDIO_SDCard_Test();
+    if (WIFI_ESP8266_Check() == APP_OK) {
+        printf("WIFI_ESP8266 Check Success\r\n");
+    }
+    // WIFI_ESP8266_Test();
     printf("Init Success\r\n");
 }

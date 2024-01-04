@@ -1028,6 +1028,11 @@
               <FileType>1</FileType>
               <FilePath>..\Application\Src\Application_Callback.c</FilePath>
             </File>
+            <File>
+              <FileName>WIFI_ESP8266.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\Src\WIFI_ESP8266.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

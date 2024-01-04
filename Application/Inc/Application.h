@@ -21,6 +21,7 @@
 #include "I2C_EEPROM_AT24C02.h"
 #include "SPI_FLASH_W25Q64.h"
 #include "SDIO_SDCard.h"
+#include "WIFI_ESP8266.h"
 
 // 定义结构体类型
 // typedef struct

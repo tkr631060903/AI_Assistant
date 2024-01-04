@@ -69,6 +69,10 @@ void Error_Handler(void);
 #define LED_G_GPIO_Port GPIOB
 #define LED_B_Pin GPIO_PIN_1
 #define LED_B_GPIO_Port GPIOB
+#define WIFI_UART_TX_Pin GPIO_PIN_10
+#define WIFI_UART_TX_GPIO_Port GPIOB
+#define WIFI_UART_RX_Pin GPIO_PIN_11
+#define WIFI_UART_RX_GPIO_Port GPIOB
 #define SDIO_SDCARD_D0_Pin GPIO_PIN_8
 #define SDIO_SDCARD_D0_GPIO_Port GPIOC
 #define SDIO_SDCARD_D1_Pin GPIO_PIN_9
@@ -91,6 +95,10 @@ void Error_Handler(void);
 #define I2C_EEPROM_SCL_GPIO_Port GPIOB
 #define I2C_EEPROM_SDA_Pin GPIO_PIN_7
 #define I2C_EEPROM_SDA_GPIO_Port GPIOB
+#define WIFI_ESP8266_EN_Pin GPIO_PIN_8
+#define WIFI_ESP8266_EN_GPIO_Port GPIOB
+#define WIFI_ESP8266_RST_Pin GPIO_PIN_9
+#define WIFI_ESP8266_RST_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
