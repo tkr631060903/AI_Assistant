@@ -10,6 +10,8 @@
  */
 #include "Application_Callback.h"
 #include <string.h>
+#include "WIFI_ESP8266.h"
+#include "UART_Debug.h"
 
 char uart1_Cmd[UART_Cmd_Length];
 int cmd_Index = 0;  //串口1命令计数指针

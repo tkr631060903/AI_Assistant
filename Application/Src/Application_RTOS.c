@@ -12,6 +12,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "cmsis_os.h"
+#include "Application.h"
 
 extern UART_HandleTypeDef huart1;
 

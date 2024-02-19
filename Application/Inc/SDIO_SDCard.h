@@ -12,6 +12,7 @@
 #define __SDIO_SDCard_H__
 
 #include "Application.h"
+#include "Application_Constant.h"
 
 #define SDCard_Debug 0
 

@@ -9,6 +9,13 @@
  *
  */
 #include "Application_Init.h"
+#include "Application_Constant.h"
+#include "UART_Debug.h"
+#include "I2C_EEPROM_AT24C02.h"
+#include "SPI_FLASH_W25Q64.h"
+#include "SDIO_SDCard.h"
+#include "WIFI_ESP8266.h"
+
 
 uint8_t Uart1_ReceiveBuff = 0;  //串口1接收缓冲区
 uint8_t Uart3_ReceiveBuff = 0;  //串口3接收缓冲区

@@ -11,9 +11,9 @@
 #ifndef __WIFI_ESP8266_H__
 #define __WIFI_ESP8266_H__
 
-#include "Application.h"
+#include "Application_Constant.h"
 
-#define WIFI_ESP8266_Reply_Length 20
+#define WIFI_ESP8266_Reply_Length 100
 
 #define     WIFI_ESP8266_RST_HIGH_LEVEL()            HAL_GPIO_WritePin(WIFI_ESP8266_RST_GPIO_Port, WIFI_ESP8266_RST_Pin, GPIO_PIN_SET)
 #define     WIFI_ESP8266_RST_LOW_LEVEL()             HAL_GPIO_WritePin(WIFI_ESP8266_RST_GPIO_Port, WIFI_ESP8266_RST_Pin, GPIO_PIN_RESET)

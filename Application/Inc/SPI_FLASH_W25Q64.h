@@ -12,6 +12,7 @@
 #define __SPI_FLASH_W25Q64_H__
 
 #include "Application.h"
+#include "Application_Constant.h"
 
 #define W25Q64_Debug 0
 #define SPI_FLASH_PageSize 256 // W25Q64页大小，256byte

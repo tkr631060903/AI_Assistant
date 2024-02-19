@@ -12,6 +12,7 @@
 #define __I2C_EEPROM_AT24C02_H__
 
 #include "Application.h"
+#include "Application_Constant.h"
 
 #define AT24C02_Debug 0
 
