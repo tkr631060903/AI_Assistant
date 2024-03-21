@@ -9,6 +9,7 @@
  * 
  */
 #include "Application.h"
+#include "UART_Debug.h"
 
 /* Public variables-----------------------------------------------------------*/
 // Application_t Application =

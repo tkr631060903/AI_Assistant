@@ -15,6 +15,7 @@
 #include "SPI_FLASH_W25Q64.h"
 #include "SDIO_SDCard.h"
 #include "WIFI_ESP8266.h"
+#include "App_WIFI.h"
 
 
 uint8_t Uart1_ReceiveBuff = 0;  //串口1接收缓冲区
@@ -89,5 +90,6 @@ void Application_Init(void)
         printf("WIFI_ESP8266 Check Success\r\n");
     }
     // WIFI_ESP8266_Test();
+    Wire_Connect_WIFIConfig("iQOONeo5", "rong19980521");
     printf("Init Success\r\n");
 }

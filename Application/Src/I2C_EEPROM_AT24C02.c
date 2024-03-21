@@ -11,6 +11,11 @@
  *
  */
 #include "I2C_EEPROM_AT24C02.h"
+#include "string.h"
+
+#if AT24C02_Debug
+#include "UART_Debug.h"
+#endif
 
 extern I2C_HandleTypeDef hi2c1;
 
@@ -19,19 +24,11 @@ extern I2C_HandleTypeDef hi2c1;
  *
  * @param WriteAddr 写入EEPROM起始地址
  * @param pData 数据缓冲区
- * @return HAL_Status
  */
-APP_StatusTypeDef I2C_EEPROM_WriteByte(uint16_t WriteAddr, uint8_t* pData)
+void I2C_EEPROM_WriteByte(uint16_t WriteAddr, uint8_t* pData)
 {
 
-  HAL_StatusTypeDef state = HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, WriteAddr, I2C_MEMADD_SIZE_8BIT, pData, 1, 1000);
-  if (state != HAL_OK)
-  {
-#if AT24C02_Debug
-    printf("Error Write EEPROM");
-#endif
-    return APP_ERROR;
-  }
+  HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, WriteAddr, I2C_MEMADD_SIZE_8BIT, pData, 1, 1000);
   // 检查I2C是否准备好
   while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
   {
@@ -44,7 +41,33 @@ APP_StatusTypeDef I2C_EEPROM_WriteByte(uint16_t WriteAddr, uint8_t* pData)
   while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
   {
   }
-  return APP_OK;
+}
+
+/**
+ * @brief 页写入数据到EEPROM，每次写入不超过8字节数据
+ *
+ * @param WriteAddr 写入EEPROM起始地址
+ * @param pData 数据缓冲区
+ */
+void I2C_EEPROM_PageWrite(uint16_t WriteAddr, uint8_t* pData, uint16_t NumByteToWrite)
+{
+  if (NumByteToWrite > EEPROM_PAGE_SIZE)
+  {
+    return;
+  }
+  HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, WriteAddr, I2C_MEMADD_SIZE_8BIT, pData, NumByteToWrite, 1000);
+  // 检查I2C是否准备好
+  while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+  {
+  }
+  // 检查I2C是否准备好
+  while (HAL_I2C_IsDeviceReady(&hi2c1, EEPROM_ADDR, 300, 100) == HAL_TIMEOUT)
+  {
+  }
+  // 等待传输结束,检查I2C是否准备好
+  while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+  {
+  }
 }
 
 /**
@@ -53,17 +76,32 @@ APP_StatusTypeDef I2C_EEPROM_WriteByte(uint16_t WriteAddr, uint8_t* pData)
  * @param WriteAddr 写入EEPROM起始地址
  * @param pData 数据缓冲区
  * @param NumByteToWrite 写入数据个数
- * @return HAL_Status
  */
-APP_StatusTypeDef I2C_EEPROM_BuffWrite(uint16_t WriteAddr, uint8_t* pData, uint16_t NumByteToWrite)
+void I2C_EEPROM_BuffWrite(uint16_t WriteAddr, uint8_t* pData, uint16_t NumByteToWrite)
 {
-  HAL_StatusTypeDef state = HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, WriteAddr, I2C_MEMADD_SIZE_8BIT, pData, NumByteToWrite, 1000);
-  if (state != HAL_OK)
+  uint8_t pageCount = 0;  // 需要写入的页数
+  uint8_t lastWrite = NumByteToWrite % EEPROM_PAGE_SIZE;  // 最后一次写入的字节数
+  // 计算需要写入的页数
+  if (lastWrite == 0)
   {
-#if AT24C02_Debug
-    printf("Error Write EEPROM");
-#endif
-    return APP_ERROR;
+    pageCount = NumByteToWrite / EEPROM_PAGE_SIZE;
+  }
+  pageCount = (NumByteToWrite - lastWrite) / EEPROM_PAGE_SIZE;
+  while (pageCount)
+  {
+    // 开始按页写入数据
+    I2C_EEPROM_PageWrite(WriteAddr, pData, EEPROM_PAGE_SIZE);
+    pageCount--;
+    WriteAddr += EEPROM_PAGE_SIZE;
+    pData += EEPROM_PAGE_SIZE;
+    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+    {
+    }
+  }
+  if (lastWrite != 0)
+  {
+    // 写入最后一次不满8个字节的数据
+    HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, WriteAddr, I2C_MEMADD_SIZE_8BIT, pData, lastWrite, 1000);
   }
   // 检查I2C是否准备好
   while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
@@ -76,6 +114,171 @@ APP_StatusTypeDef I2C_EEPROM_BuffWrite(uint16_t WriteAddr, uint8_t* pData, uint1
   // 等待传输结束,检查I2C是否准备好
   while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
   {
+  }
+}
+
+/**
+ * @brief 将字符串写入到EEPROM
+ *
+ * @param WriteAddr 写入EEPROM起始地址
+ * @param pData 数据缓冲区
+ * @param NumByteToWrite 写入字符个数
+ */
+void I2C_EEPROM_StringWrite(uint16_t WriteAddr, const char* pData, uint16_t NumByteToWrite)
+{
+  uint8_t pageCount = 0;  // 需要写入的页数
+  uint8_t lastWrite = NumByteToWrite % EEPROM_PAGE_SIZE;  // 最后一次写入的字节数
+  // 计算需要写入的页数
+  if (lastWrite == 0)
+  {
+    pageCount = NumByteToWrite / EEPROM_PAGE_SIZE;
+  }
+  pageCount = (NumByteToWrite - lastWrite) / EEPROM_PAGE_SIZE;
+  while (pageCount)
+  {
+    // 开始按页写入数据
+    I2C_EEPROM_PageWrite(WriteAddr, (uint8_t*)pData, EEPROM_PAGE_SIZE);
+    pageCount--;
+    WriteAddr += EEPROM_PAGE_SIZE;
+    pData += EEPROM_PAGE_SIZE;
+    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+    {
+    }
+  }
+  if (lastWrite != 0)
+  {
+    // 写入最后一次不满8个字节的数据
+    HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, WriteAddr, I2C_MEMADD_SIZE_8BIT, (uint8_t*)pData, lastWrite, 1000);
+  }
+  // 检查I2C是否准备好
+  while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+  {
+  }
+  // 检查I2C是否准备好
+  while (HAL_I2C_IsDeviceReady(&hi2c1, EEPROM_ADDR, 300, 100) == HAL_TIMEOUT)
+  {
+  }
+  // 等待传输结束,检查I2C是否准备好
+  while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+  {
+  }
+}
+
+/**
+ *@brief 将字符串写入到EEPROM，回读数据校验
+ *
+ * @param WriteAddr 写入EEPROM起始地址
+ * @param pData 数据缓冲区
+ * @param NumByteToWrite 写入字符个数
+ * @return APP_StatusTypeDef
+ */
+APP_StatusTypeDef I2C_EEPROM_StringWrite_Check(uint16_t WriteAddr, const char* pData, uint16_t NumByteToWrite)
+{
+  uint8_t pageCount = 0;  // 需要写入的页数
+  uint8_t lastWrite = NumByteToWrite % EEPROM_PAGE_SIZE;  // 最后一次写入的字节数
+  uint16_t nitialAddress = WriteAddr; // 写入数据的初始地址
+  const char* nitialData = pData; // 写入数据的初始数(指针)
+  // 计算需要写入的页数
+  if (lastWrite == 0)
+  {
+    pageCount = NumByteToWrite / EEPROM_PAGE_SIZE;
+  }
+  pageCount = (NumByteToWrite - lastWrite) / EEPROM_PAGE_SIZE;
+  while (pageCount)
+  {
+    // 开始按页写入数据
+    I2C_EEPROM_PageWrite(WriteAddr, (uint8_t*)pData, EEPROM_PAGE_SIZE);
+    pageCount--;
+    WriteAddr += EEPROM_PAGE_SIZE;
+    pData += EEPROM_PAGE_SIZE;
+    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+    {
+    }
+  }
+  if (lastWrite != 0)
+  {
+    // 写入最后一次不满8个字节的数据
+    HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, WriteAddr, I2C_MEMADD_SIZE_8BIT, (uint8_t*)pData, lastWrite, 1000);
+  }
+  // 检查I2C是否准备好
+  while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+  {
+  }
+  // 检查I2C是否准备好
+  while (HAL_I2C_IsDeviceReady(&hi2c1, EEPROM_ADDR, 300, 100) == HAL_TIMEOUT)
+  {
+  }
+  // 等待传输结束,检查I2C是否准备好
+  while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+  {
+  }
+  // 回读EEPROM数据并校验
+  const char pDataCheck[NumByteToWrite];
+  I2C_EEPROM_StringRead(nitialAddress, pDataCheck, NumByteToWrite);
+  if (strcmp(nitialData, pDataCheck) != 0)
+  {
+    return APP_ERROR;
+  }
+  return APP_OK;
+}
+
+/**
+ * @brief 连续写数据到EEPROM，回读数据校验
+ *
+ * @param WriteAddr 写入EEPROM起始地址
+ * @param pData 数据缓冲区
+ * @param NumByteToWrite 写入数据个数
+ * @return APP_StatusTypeDef
+ */
+APP_StatusTypeDef I2C_EEPROM_BuffWrite_Check(uint16_t WriteAddr, uint8_t* pData, uint16_t NumByteToWrite)
+{
+  uint8_t pageCount = 0;  // 需要写入的页数
+  uint8_t lastWrite = NumByteToWrite % EEPROM_PAGE_SIZE;  // 最后一次写入的字节数
+  uint16_t nitialAddress = WriteAddr; // 写入数据的初始地址
+  uint8_t* nitialData = pData; // 写入数据的初始数(指针)
+  // 计算需要写入的页数
+  if (lastWrite == 0)
+  {
+    pageCount = NumByteToWrite / EEPROM_PAGE_SIZE;
+  }
+  pageCount = (NumByteToWrite - lastWrite) / EEPROM_PAGE_SIZE;
+  while (pageCount)
+  {
+    // 开始按页写入数据
+    I2C_EEPROM_PageWrite(WriteAddr, pData, EEPROM_PAGE_SIZE);
+    pageCount--;
+    WriteAddr += EEPROM_PAGE_SIZE;
+    pData += EEPROM_PAGE_SIZE;
+    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+    {
+    }
+  }
+  if (lastWrite != 0)
+  {
+    // 写入最后一次不满8个字节的数据
+    HAL_I2C_Mem_Write(&hi2c1, EEPROM_ADDR, WriteAddr, I2C_MEMADD_SIZE_8BIT, pData, lastWrite, 1000);
+  }
+  // 检查I2C是否准备好
+  while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+  {
+  }
+  // 检查I2C是否准备好
+  while (HAL_I2C_IsDeviceReady(&hi2c1, EEPROM_ADDR, 300, 100) == HAL_TIMEOUT)
+  {
+  }
+  // 等待传输结束,检查I2C是否准备好
+  while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+  {
+  }
+  // 回读EEPROM数据并校验
+  uint8_t pDataCheck[NumByteToWrite];
+  I2C_EEPROM_BuffRead(nitialAddress, pDataCheck, NumByteToWrite);
+  for (int i = 0; i < NumByteToWrite; i++)
+  {
+    if (pDataCheck[i] != nitialData[i])
+    {
+      return APP_ERROR;
+    }
   }
   return APP_OK;
 }
@@ -85,12 +288,33 @@ APP_StatusTypeDef I2C_EEPROM_BuffWrite(uint16_t WriteAddr, uint8_t* pData, uint1
  *
  * @param ReadAddr 读取EEPROM起始地址
  * @param pData 数据缓冲区
- * @param NumByteToRead 写入数据个数
+ * @param NumByteToRead 读取数据个数
  * @return HAL_Status
  */
 APP_StatusTypeDef I2C_EEPROM_BuffRead(uint16_t ReadAddr, uint8_t* pData, uint16_t NumByteToRead)
 {
   HAL_StatusTypeDef state = HAL_I2C_Mem_Read(&hi2c1, EEPROM_ADDR, ReadAddr, I2C_MEMADD_SIZE_8BIT, pData, NumByteToRead, 1000);
+  if (state != HAL_OK)
+  {
+#if AT24C02_Debug
+    printf("Error Read EEPROM");
+#endif
+    return APP_ERROR;
+  }
+  return APP_OK;
+}
+
+/**
+ * @brief 以字符串形式读取EEPROM数据
+ *
+ * @param ReadAddr 读取EEPROM起始地址
+ * @param pData 数据缓冲区
+ * @param NumByteToRead 读取字符个数
+ * @return HAL_Status
+ */
+APP_StatusTypeDef I2C_EEPROM_StringRead(uint16_t ReadAddr, const char* pData, uint16_t NumByteToRead)
+{
+  HAL_StatusTypeDef state = HAL_I2C_Mem_Read(&hi2c1, EEPROM_ADDR, ReadAddr, I2C_MEMADD_SIZE_8BIT, (uint8_t*)pData, NumByteToRead, 1000);
   if (state != HAL_OK)
   {
 #if AT24C02_Debug

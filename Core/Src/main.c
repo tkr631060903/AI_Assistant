@@ -30,6 +30,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Application.h"
+#include "Application_Init.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
