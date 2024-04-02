@@ -10,7 +10,6 @@
  */
 #include "Application_Callback.h"
 #include <string.h>
-#include "WIFI_ESP8266.h"
 #include "UART_Debug.h"
 
 char uart1_Cmd[UART_Cmd_Length];
@@ -59,17 +58,5 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
             cmd_Index = 0;
         }
         HAL_UART_Receive_IT(&huart1, &Uart1_ReceiveBuff, 1);
-    }
-    else if (huart == &huart3) {
-        extern char WIFI_ESP8266_Reply[WIFI_ESP8266_Reply_Length];
-        extern uint8_t Uart3_ReceiveBuff;
-        WIFI_ESP8266_Reply[WIFI_ESP8266_Reply_Index] = (char)Uart3_ReceiveBuff;   //保持ESP8266应答信息到WIFI_ESP8266_Reply
-        WIFI_ESP8266_Reply_Index++;
-        if (WIFI_ESP8266_Reply_Index >= WIFI_ESP8266_Reply_Length)
-        {
-            WIFI_ESP8266_Reply_Index = 0;
-        }
-        // HAL_UART_Transmit(&huart1, &Uart3_ReceiveBuff, 1, 1000);
-        HAL_UART_Receive_IT(&huart3, &Uart3_ReceiveBuff, 1);
     }
 }

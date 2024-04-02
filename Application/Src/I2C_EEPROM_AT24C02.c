@@ -332,11 +332,11 @@ APP_StatusTypeDef I2C_EEPROM_StringRead(uint16_t ReadAddr, const char* pData, ui
  */
 APP_StatusTypeDef I2C_EEPROM_Check(void)
 {
-  uint8_t data[1] = { 0x10 };
-  I2C_EEPROM_BuffWrite(2047, data, 1);
-  data[0] = 0;
-  I2C_EEPROM_BuffRead(2047, data, 1);
-  if (data[0] == 0x10)
+  uint8_t data =  0x10 ;
+  I2C_EEPROM_BuffWrite(2047, &data, 1);
+  data = 0;
+  I2C_EEPROM_BuffRead(2047, &data, 1);
+  if (data == 0x10)
   {
     return APP_OK;
   }

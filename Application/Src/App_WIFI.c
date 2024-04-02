@@ -13,12 +13,12 @@ APP_StatusTypeDef Wire_Connect_WIFIConfig(const char* WIFI_SSID, const char* WIF
 {
     size_t WIFI_SSID_Len = strlen(WIFI_SSID) + 1;
     size_t WIFI_PASSWORD_Len = strlen(WIFI_PASSWORD) + 1;
-    I2C_EEPROM_StringWrite(0x00, WIFI_SSID, WIFI_SSID_Len);
-    I2C_EEPROM_StringWrite(0x30, WIFI_PASSWORD, WIFI_PASSWORD_Len);
+    I2C_EEPROM_StringWrite(WIFI_SSID_SAVEADDR, WIFI_SSID, WIFI_SSID_Len);
+    I2C_EEPROM_StringWrite(WIFI_PASSWORD_SAVEADDR, WIFI_PASSWORD, WIFI_PASSWORD_Len);
     // char pData[WIFI_SSID_Len];
     // char pData2[WIFI_PASSWORD_Len];
-    // I2C_EEPROM_StringRead(0x00, pData, WIFI_SSID_Len);
-    // I2C_EEPROM_StringRead(0x30, pData2, WIFI_PASSWORD_Len);
+    // I2C_EEPROM_StringRead(WIFI_SSID_SAVEADDR, pData, WIFI_SSID_Len);
+    // I2C_EEPROM_StringRead(WIFI_PASSWORD_SAVEADDR, pData2, WIFI_PASSWORD_Len);
     // printf("SSID: %s\r\n", pData);
     // printf("Password: %s\r\n", pData2);
     return WIFI_ESP8266_Connect(WIFI_SSID, WIFI_PASSWORD);

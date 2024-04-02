@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2023
  *
  */
-#ifndef __Application_Init_H__
-#define __Application_Init_H__
+#ifndef Application_Init_H
+#define Application_Init_H
 
 void Application_Init(void);
 

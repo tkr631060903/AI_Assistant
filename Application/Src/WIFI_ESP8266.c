@@ -75,8 +75,10 @@ APP_StatusTypeDef WIFI_ESP8266_Check(void)
 
 /**
  *@brief 使用STA模式连接WIFI
- *
- * @return APP_StatusTypeDef
+ * 
+ * @param WIFI_SSID 
+ * @param WIFI_PASSWORD 
+ * @return APP_StatusTypeDef 
  */
 APP_StatusTypeDef WIFI_ESP8266_Connect(const char *WIFI_SSID, const char *WIFI_PASSWORD)
 {

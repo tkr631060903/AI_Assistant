@@ -11,45 +11,12 @@
 #include "Application_Init.h"
 #include "Application_Constant.h"
 #include "UART_Debug.h"
-#include "I2C_EEPROM_AT24C02.h"
-#include "SPI_FLASH_W25Q64.h"
-#include "SDIO_SDCard.h"
-#include "WIFI_ESP8266.h"
-#include "App_WIFI.h"
+#include "lcd.h"
+#include "lcd_init.h"
+#include "pic.h"
 
 
 uint8_t Uart1_ReceiveBuff = 0;  //串口1接收缓冲区
-uint8_t Uart3_ReceiveBuff = 0;  //串口3接收缓冲区
-
-/**
-* @brief SD卡自定义初始化
-*
-*/
-void SDIO_CARD_Init(void)
-{
-    /* 初始化完成SDIO卡后为了提高读写，开启4bits模式 */
-    extern SD_HandleTypeDef hsd;
-    hsd.Init.BusWide = SDIO_BUS_WIDE_1B;
-    if (HAL_SD_Init(&hsd) != HAL_OK)
-    {
-        Error_Handler();
-    }
-
-    if (HAL_SD_ConfigWideBusOperation(&hsd, SDIO_BUS_WIDE_4B) != HAL_OK)
-    {
-        Error_Handler();
-    }
-}
-
-/**
-* @brief WIFI_ESP8266自定义初始化
-*
-*/
-void WIFI_ESP8266_Init(void)
-{
-    WIFI_ESP8266_RST_HIGH_LEVEL();
-    WIFI_ESP8266_ENABLE();
-}
 
 /**
  * @brief 应用初始化
@@ -59,37 +26,42 @@ void Application_Init(void)
 {
     // 初始化串口中断输入
     HAL_UART_Receive_IT(&huart1, &Uart1_ReceiveBuff, 1);
-    HAL_UART_Receive_IT(&huart3, &Uart3_ReceiveBuff, 1);
-    SDIO_CARD_Init();
-    WIFI_ESP8266_Init();
-    // I2C_EEPROM_WRTest();
-    if (I2C_EEPROM_Check() == APP_OK) {
-        printf("EEPROM Check Success\r\n");
-    }
-    else {
-        printf("EEPROM Check Failed\r\n");
-        Error_Handler();
-    }
-    // SPI_FLASH_Test();
-    if (SPI_FLASH_Check() == APP_OK) {
-        printf("FLASH Check Success\r\n");
-    }
-    else {
-        printf("FLASH Check Failed\r\n");
-        Error_Handler();
-    }
-    // SDIO_SDCard_Test();
-    if (SDIO_SDCard_Check() == APP_OK) {
-        printf("SDCard Check Success\r\n");
-    }
-    else {
-        printf("SDCard Check Failed\r\n");
-        Error_Handler();
-    }
-    if (WIFI_ESP8266_Check() == APP_OK) {
-        printf("WIFI_ESP8266 Check Success\r\n");
-    }
-    // WIFI_ESP8266_Test();
-    Wire_Connect_WIFIConfig("iQOONeo5", "rong19980521");
     printf("Init Success\r\n");
+
+    float t = 0;
+    LCD_Init();
+    // LCD_Fill(0, 0, LCD_W, LCD_H, BLUE);
+    //LED=0;
+    uint32_t start = 0;
+    uint32_t time = 0;
+    // I2C_EEPROM_BuffWrite(0x00, (uint8_t*)gImage_2, 2056);
+    uint8_t flag = 0;
+    while (1)
+    {
+        start = HAL_GetTick();
+        // LCD_ShowChinese(40, 0, "ABC", RED, WHITE, 32, 0);
+        // LCD_ShowIntNum(40, 0, time, 3, RED, WHITE, 32);
+        // LCD_ShowString(10, 33, "LCD_W:", RED, WHITE, 32, 0);
+        // LCD_ShowIntNum(106, 33, LCD_W, 3, RED, WHITE, 32);
+        // LCD_ShowString(10, 66, "LCD_H:", RED, WHITE, 32, 0);
+        // LCD_ShowIntNum(106, 66, LCD_H, 3, RED, WHITE, 32);
+        // LCD_ShowFloatNum1(10, 99, t, 4, RED, WHITE, 32);
+        // t += 0.11;
+        // LCD_ShowPicture(160,95,40,40,gImage_1);
+        // LCD_ShowPicture(160,95,32,32,gImage_img);
+        // LCD_ShowPicture(0, 0, 222, 135, gImage_qier);
+        // if (flag == 0)
+        // {
+        //     LCD_Fill(0, 0, LCD_W, LCD_H, BLUE);
+        //     flag = 1;
+        // }else
+        // {
+        //     LCD_Fill(0, 0, LCD_W, LCD_H, WHITE);
+        //     flag = 0;
+        // }
+        LCD_Fill(0, 0, LCD_W, LCD_H, WHITE);
+        time = HAL_GetTick() - start;
+        printf("time = %d\r\n", time);
+        HAL_Delay(5000);
+    }
 }
