@@ -121,7 +121,7 @@ void LCD_Init(void)
 	// delay(100);
 
 	// LCD_BLK_Set();//´ò¿ª±³¹â
-	delay(100);
+	// delay(100);
 
 	LCD_WR_REG(0x11);
 	delay(120);

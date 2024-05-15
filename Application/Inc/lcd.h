@@ -23,11 +23,13 @@ void LCD_ShowFloatNum1(uint16_t x,uint16_t y,float num,uint8_t len,uint16_t fc,u
 
 void LCD_ShowPicture(uint16_t x,uint16_t y,uint16_t length,uint16_t width,const uint8_t pic[]);//????????????
 
+void LCD_Fill_DMA(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, uint16_t color);
 
 //????????????????????
 #define WHITE         	 0xFFFF
 #define BLACK         	 0x0000	  
 #define BLUE           	 0x001F  
+// #define BLUE           	 0x0506  
 #define BRED             0XF81F
 #define GRED 			       0XFFE0
 #define GBLUE			       0X07FF
